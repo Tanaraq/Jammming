@@ -7,6 +7,10 @@ import {Playlist} from './../Playlist/Playlist';
 class App extends React.Component {
   constructor(props){
     super(props);
+
+    this.addTrack = this.addTrack.bind(this); 
+    this.removeTrack = this.removeTrack.bind(this);
+
     this.state= {
       searchResults: [
         { id:1, name:'Everybody dies' , artist:'Ayreon' , album:'The Source'},
@@ -16,7 +20,24 @@ class App extends React.Component {
       playlistTracks: [
         {id:'iets', name:'Requiem' , artist:'Pobel' , album:'Lux Luminem'}
       ]
+    }    
+  }
+  
+  addTrack(track){
+    let songs = this.state.playlistTracks;
+    if (songs.find(savedTrack => savedTrack.id === track.id)) {
+      return;
+    } else {      
+      songs.push(track);
+      this.setState({playlistTracks: songs});
     }
+  }
+
+  removeTrack(track){
+    let songs = this.state.playlistTracks;
+    songs= songs.filter(song => song.id !==track.id
+      );
+    this.setState({playlistTracks: songs});
   }
 
   render(){
@@ -26,8 +47,8 @@ class App extends React.Component {
         <div className="App">
           <SearchBar />
           <div className="App-playlist">
-            <SearchResults searchResults= {this.state.searchResults}/> 
-            <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks}/> 
+            <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack}/> 
+            <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks} onRemove={this.removeTrack}/> 
           </div>
         </div>
       </div>
