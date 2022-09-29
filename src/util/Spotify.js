@@ -1,5 +1,6 @@
 import React from "react";
 import { SearchBar } from "../Components/SearchBar/SearchBar";
+import { Playlist } from "../Components/Playlist/Playlist";
 
 const clientID= "791d446b8c2c4e5c86238519613412fe";
 const redirectURI= "http://localhost:3000/";
@@ -19,8 +20,10 @@ const Spotify = {
         if(matchAccess && matchExpire){
             key = matchAccess[1];
             let expiresIn = Number(matchExpire[1]);
+            
             window.setTimeout(() => key = '', expiresIn * 1000);
             window.history.pushState('Access Token', null, '/');
+            
             return key;
 
         } else {
@@ -37,7 +40,6 @@ const Spotify = {
 
         }).then(response => {
             if(response.ok){
-                //console.log(response);
                 return response.json();
             } 
             throw new Error('Request failed!');
@@ -47,7 +49,6 @@ const Spotify = {
             if (!jsonResponse.tracks){
                 return [];
             } else {
-                console.log(jsonResponse.tracks.items);
                 return jsonResponse.tracks.items.map(track => 
                     ({
                         id :track.id,
@@ -59,6 +60,51 @@ const Spotify = {
                 )
             }    
         })
+    },
+
+    savePlaylist(playlistName, trackURIs){
+        console.log(playlistName);
+        if (!playlistName && trackURIs.length) {
+            return;
+        }
+
+        let accessToken = Spotify.getAccessToken();
+        const headers = {
+            Authorization: `Bearer ${accessToken}`
+        }
+        let userID;
+
+        return fetch('https://api.spotify.com/v1/me', {headers:headers}
+        ).then ( response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error ('Request failed');
+        }, networkError =>console.log(networkError.message)
+        ).then(jsonResponse => {
+            userID = jsonResponse.id;
+         
+            return fetch(`https://api.spotify.com/v1/users/${userID}/playlists`, {
+                headers: headers,
+                method:'POST',
+                body: JSON.stringify({name: playlistName})
+            }).then ( response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error ('Request failed');
+            }, networkError =>console.log(networkError.message)
+            ).then(jsonResponse =>{
+                let playlistID = jsonResponse.id;
+                                
+                return fetch(`https://api.spotify.com/v1/users/${userID}/playlists/${playlistID}/tracks`, {
+                    headers: headers,
+                    method:'POST',
+                    body: JSON.stringify({uris: trackURIs})
+                })
+            })
+       })
+    
     }
 } 
 

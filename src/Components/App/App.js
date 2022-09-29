@@ -17,12 +17,12 @@ class App extends React.Component {
 
     this.state= {
       searchResults: [
-        { id:1, name:'Everybody dies' , artist:'Ayreon' , album:'The Source'},
-        { id:2, name:'Bacchus bene venies', artist:'Datura' , album: 'Gratus et optatus'}
+        //{ id:1, name:'Everybody dies' , artist:'Ayreon' , album:'The Source'},
+        //{ id:2, name:'Bacchus bene venies', artist:'Datura' , album: 'Gratus et optatus'}
       ],
       playlistName: '',
       playlistTracks: [
-        {id:'iets', name:'Requiem' , artist:'Pobel' , album:'Lux Luminem'}
+        //{id:'iets', name:'Requiem' , artist:'Pobel' , album:'Lux Luminem'}
       ]
     }    
   }
@@ -51,14 +51,16 @@ class App extends React.Component {
   }
 
   updatePlaylistName(name){
-    this.setState({ name: name })
+    this.setState({ playlistName: name })
   }
 
   savePlaylist(){
     let trackURIs = [];
     this.state.playlistTracks.map(track => {
-      return trackURIs.push(track.uri)
+      return trackURIs.push(track.URI)
     })
+    Spotify.savePlaylist(this.state.playlistName,trackURIs);
+    //this.setState({ playlistName: 'New Playlist', playlistTracks: []})
   }
 
   render(){
