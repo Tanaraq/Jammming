@@ -28,6 +28,9 @@ export class Track extends React.Component{
     render(){
         return (
             <div className="Track">
+                <div className="Track-image">
+                    <img src={this.props.track.image} alt= "album-cover of {this.props.track.name} by {this.props.track.artist}"/>
+                </div>
                 <div className="Track-information">
                     <h3>{this.props.track.name}</h3>
                     <p>{this.props.track.artist} | {this.props.track.album}</p>

@@ -3,6 +3,19 @@
     align-items: center;
     border-bottom: 1px solid rgba(256, 256, 256, 0.8);
   }
+
+  .Track-image {
+    width: 70px;
+    height: 70px;
+    margin-right: 1em;
+    overflow: hidden;
+  }
+  
+  .Track-image img{
+    max-width: 100%;
+    height: auto;
+    display: block
+  }
   
   .Track-action {
     cursor: pointer;

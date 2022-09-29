@@ -24,6 +24,7 @@ export class SearchBar extends React.Component{
                     onChange= {this.handleTermChange}
                     />
                 <button 
+                    type = "button"
                     className="SearchButton" 
                     onClick={this.search}
                     >SEARCH
