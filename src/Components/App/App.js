@@ -27,6 +27,10 @@ class App extends React.Component {
     }    
   }
 
+  componentDidMount() {
+    window.addEventListener('load', () => {Spotify.getAccessToken()});
+  }
+
   search(term){
     Spotify.search(term).then(searchResults => {
       this.setState({searchResults: searchResults})
