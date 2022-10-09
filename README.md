@@ -1,6 +1,7 @@
 # Welcome to Jammming
 
 Jammming is a React-web-app that allows users to search the Spotify library, create a custom playlist, then save it to their Spotify account.
+See it in action here: https://myjammming.netlify.app/ .
 
 ## About this project
 
@@ -17,10 +18,10 @@ I added the album pictures to the tracks shown.
 
 ### What I want to add
 
-I would like to be able to see my already existing playlists and add or remove tracks form the selected playlist. This will involve making another request to retrieve the playlist
+I would like to be able to see any already-existing playlists and then add or remove tracks from the selected playlist. This will involve making another request to retrieve the playlist, displaying those, and selecting to which playlist to add the tracks. 
 
 ### What I want to (try to) refactor:
 
-This project was built making use of Class Components. However, a week later I learned what functional components are. I think rewriting the components to functions instead of classes will make for more concise code, giving some nice opportunities to practice hooks and effects, as well as being a nice challenge for me.
+This project was built making use of Class Components. However, a week later I learned what functional components are. I think rewriting the components to functions instead of classes will make for more concise code, as well as being a nice challenge for me.
 
 
