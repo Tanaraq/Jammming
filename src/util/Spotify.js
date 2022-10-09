@@ -3,7 +3,8 @@ import { SearchBar } from "../Components/SearchBar/SearchBar";
 import { Playlist } from "../Components/Playlist/Playlist";
 
 const clientID= "791d446b8c2c4e5c86238519613412fe";
-const redirectURI= "http://localhost:3000/";
+//const redirectURI= "http://localhost:3000/";
+const redirectURI= "https://myjammming.netlify.app"
 
 let key;
 
