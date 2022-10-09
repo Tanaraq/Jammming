@@ -65,7 +65,8 @@ class App extends React.Component {
     })
     Spotify.savePlaylist(this.state.playlistName,trackURIs);
     alert('The playlist was succesfully saved to your Spotify account.');
-    this.setState({ playlistName: 'New Playlist', playlistTracks: []})
+    this.setState({ playlistName: 'New Playlist', playlistTracks: []});
+    Playlist.handleNameChange(this.state.playlistName);    
   }
 
   render(){
